@@ -6,7 +6,7 @@ public interface Service {
 
     void createProject(String name);
 
-    void createProject(int id);
+    //void createProject(int id);
 
     void createProject(Project project);
 
@@ -14,34 +14,34 @@ public interface Service {
 
     void addFloorToProject(int projectId);
 
-    void removeFloorFromProject(String projectName, int floorId);
+    void removeFloorFromProject(int projectID, int floorId);
 
-    void removeFloorFromProject(int floorId);
+   // void removeFloorFromProject(int floorId);
 
-    Floor getFloor(String projectName, int floorLevel);
+  //  Floor getFloor(String projectName, int floorLevel);
 
-    Floor getFloor(int projectId, int floorLevel);
+    Floor getFloor(int projectId, int floorID);
 
-    List<Floor> getFloors(String projectName);
+   // List<Floor> getFloors(String projectName);
 
-    List<Floor> getFloors(int projectId);
+    HashMap<Integer, Floor> getFloors(int projectId);
 
-    void addRoomToFloor(String projectName, int floorLevel);
+   // void addRoomToFloor(String projectName, int floorLevel);
 
-    void addRoomToFloor(int projectId, int floorLevel);
+    void addRoomToFloor(int projectId, int floorID);
 
-    void addRoomToFloor(int floorId);
+ //   void addRoomToFloor(int floorId);
 
-    Room getRoom(String projectName, int floorLevel, int roomId);
+   // Room getRoom(String projectName, int floorLevel, int roomId);
 
-    Room getRoom(int projectId, int floorLevel, int roomId);
+    Room getRoom(int projectId, int floorID, int roomId);
 
-    List<Room> getRooms(String projectName, int floorLevel);
+  //  List<Room> getRooms(String projectName, int floorLevel);
 
-    List<Room> getRooms(int projectId, int floorLevel);
+    HashMap<Integer, Room> getRooms(int projectId, int floorID);
 
-    void addMediaToRoom(int roomId);
+    void addMediaToRoom(int projectID, int floorID, int roomId, String input);
 
-    List<String> getMediaOfRoom(int roomId);
+    List<String> getMediaOfRoom(int projectID, int floorID, int roomID);
 
 }

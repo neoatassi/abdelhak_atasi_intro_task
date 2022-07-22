@@ -2,61 +2,89 @@ package com.gradle.code;
 
 import java.util.*;
 
-class Project_Service {
+class Project_Service implements Service {
 
     /**
      * Counters to initialize and declare IDs
      */
-    int projectCounter = 0;
-    int floorCounter = 0;
-    int roomCounter = 0;
+    static int projectCounter = 0;
+    static int floorCounter = 0;
+    static int roomCounter = 0;
 
     /**
-     * Hashmap of project entries and project names
+     * Hashmap of project entries with their unique IDs
      */
-    public Map<String, Project> Projects = new HashMap<String, Project>();
+    public Map<Integer, Project> Projects = new HashMap<Integer, Project>();
 
-    /**
-     * Create a new Project with a name parameter
-     * @param name
-     */
-    void createProject(String name)
-    {
-        Project newProject = new Project();
-        Projects.put(name, newProject);
-        newProject.project_id = projectCounter++;
+
+    @Override
+    public void createProject(String name) {
+        Projects.putIfAbsent(projectCounter, new Project(name, projectCounter));
+        projectCounter += 1000;
     }
 
-    /**
-     * Create a new Project with no parameters
-     */
-    void createProject(){
-        Project newProject = new Project();
-        Projects.put("unnamed" ,newProject);
-        newProject.project_id = projectCounter++;
+    @Override
+    public void createProject(Project project) {
+        Projects.putIfAbsent(projectCounter, new Project(project));
+        projectCounter += 1000;
     }
 
-    void addProject(Project project, String project_name){
-        Project newProject = project;
-        Projects.putIfAbsent(project_name, newProject);
-        newProject.project_id = projectCounter++;
+    @Override
+    public void addFloorToProject(String projectName) {
+        floorCounter += projectCounter;
+      //  Projects.values(projectName).get
+        floorCounter += 100;
     }
 
-    void addFloorsToProject(String project_name, int floorAmount){
-        for(int i = 0; i < floorAmount; i++) {
-            Projects.get(project_name).floors.add(new Floor(floorCounter++));
-        }
+    @Override
+    public void addFloorToProject(int projectId) {
+        floorCounter += projectCounter + 100;
+        Projects.get(projectId).addFloor(floorCounter);
     }
 
-    void addRoomsToFloor(String project_name, int floorLevel,int roomAmount){
-        for(int i = 0; i < roomAmount; i++){
-            Projects.get(project_name).floors.get(floorLevel).room.add(new Room(roomCounter++));
-        }
+    @Override
+    public void removeFloorFromProject(int projectID, int floorId) {
+        Projects.get(projectID).removeFloor(floorId);
     }
 
-    void addMediaToRoom(String project_name, int floorLevel, int roomID, String media){
-        Projects.get(project_name).floors.get(floorLevel).room.stream().filter(room -> room.room_id == searchID)
+
+    @Override
+    public Floor getFloor(int projectId, int floorID) {
+       return Projects.get(projectId).floors.get(floorID);
     }
 
+
+    @Override
+    public HashMap<Integer, Floor> getFloors(int projectId) {
+        return Projects.get(projectId).floors;
+    }
+
+
+    @Override
+    public void addRoomToFloor(int projectId, int floorID) {
+        roomCounter += floorCounter + 10;
+        Projects.get(projectId).floors.get(floorID).addRoom(roomCounter);
+    }
+
+    @Override
+    public Room getRoom(int projectId, int floorID, int roomId) {
+        return Projects.get(projectId).floors.get(floorID).rooms.get(roomId);
+    }
+
+
+    @Override
+    public HashMap<Integer, Room> getRooms(int projectId, int floorID) {
+        return Projects.get(projectId).floors.get(floorID).rooms;
+    }
+
+    @Override
+    public void addMediaToRoom(int projectID, int floorID, int roomID, String input) {
+        Projects.get(projectID).floors.get(floorID).rooms.get(roomID).media.add(input);
+    }
+
+    @Override
+    public List<String> getMediaOfRoom(int projectID, int floorID, int roomID) {
+        return Projects.get(projectID).floors.get(floorID).rooms.get(roomID).media;
+    }
 
 }

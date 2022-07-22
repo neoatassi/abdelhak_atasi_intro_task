@@ -2,10 +2,10 @@ package com.gradle.code;
 
 import java.util.*;
 
-class Project extends Floor{
-    // project_name;
-    int project_id;
-    List<Floor> floors;
+class Project {
+    String projectName;
+    int projectId;
+    HashMap<Integer, Floor> floors;
 
     /*
     Project (int project_id){
@@ -13,9 +13,22 @@ class Project extends Floor{
     }
     */
 
-    /*
-    Project(String name){
-        this.project_name = name;
+
+    Project(String name, int projectId){
+        this.projectName = name;
+        this.projectId = projectId;
     }
-    */
+
+    Project(Project project){
+        this(project.projectName, project.projectId);
+    }
+
+    void addFloor(int floorId){
+        floors.putIfAbsent(floorId, new Floor(floorId, floors.size()));
+    }
+
+    void removeFloor(int floorId){
+        floors.remove(floorId);
+    }
+
 }
