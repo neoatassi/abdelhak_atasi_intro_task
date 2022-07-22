@@ -2,61 +2,46 @@ package com.gradle.code;
 
 import java.util.*;
 
-abstract class Service extends Project{
+public interface Service {
 
-    /**
-     * Counters to initialize and declare IDs
-     */
-    int projectCounter = 0;
-    int floorCounter = 0;
-    int roomCounter = 0;
+    void createProject(String name);
 
-    /**
-     * Hashmap of project entries and project names
-     */
-    public Map<String, Project> Projects = new HashMap<String, Project>();
+    void createProject(int id);
 
-    /**
-     * Create a new Project with a name parameter
-     * @param name
-     */
-    void createProject(String name)
-    {
-        Project newProject = new Project();
-        Projects.put(name, newProject);
-        newProject.project_id = projectCounter++;
-    }
+    void createProject(Project project);
 
-    /**
-     * Create a new Project with no parameters
-     */
-    void createProject(){
-        Project newProject = new Project();
-        Projects.put("unnamed" ,newProject);
-        newProject.project_id = projectCounter++;
-    }
+    void addFloorToProject(String projectName);
 
-    void addProject(Project project, String project_name){
-        Project newProject = project;
-        Projects.putIfAbsent(project_name, newProject);
-        newProject.project_id = projectCounter++;
-    }
+    void addFloorToProject(int projectId);
 
-    void addFloorstoProject(String project_name, int floorAmount){
-        for(int i = 0; i < floorAmount; i++) {
-            Projects.get(project_name).floors.add(new Floor(floorCounter++));
-        }
-    }
+    void removeFloorFromProject(String projectName, int floorId);
 
-    void addRoomsToFloor(String project_name, int floorLevel,int roomAmount){
-        for(int i = 0; i < roomAmount; i++){
-            Projects.get(project_name).floors.get(floorLevel).room.add(new Room(roomCounter++));
-        }
-    }
+    void removeFloorFromProject(int floorId);
 
-    void addMediaToRoom(String project_name, int floorLevel, int roomID, String media){
+    Floor getFloor(String projectName, int floorLevel);
 
-    }
+    Floor getFloor(int projectId, int floorLevel);
 
+    List<Floor> getFloors(String projectName);
+
+    List<Floor> getFloors(int projectId);
+
+    void addRoomToFloor(String projectName, int floorLevel);
+
+    void addRoomToFloor(int projectId, int floorLevel);
+
+    void addRoomToFloor(int floorId);
+
+    Room getRoom(String projectName, int floorLevel, int roomId);
+
+    Room getRoom(int projectId, int floorLevel, int roomId);
+
+    List<Room> getRooms(String projectName, int floorLevel);
+
+    List<Room> getRooms(int projectId, int floorLevel);
+
+    void addMediaToRoom(int roomId);
+
+    List<String> getMediaOfRoom(int roomId);
 
 }

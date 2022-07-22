@@ -2,7 +2,7 @@ package com.gradle.code;
 
 import java.util.*;
 
-class Floor extends Room{
+class Floor {
     int floor_id;
     int floor_level;
     List<Room> room;
