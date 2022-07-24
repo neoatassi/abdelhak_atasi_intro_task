@@ -7,8 +7,6 @@ public class Floor {
     int floorLevel;
     HashMap<Integer, Room> rooms;
 
-    Floor(){}
-
     public Floor(int floor_id){
         this.floorID = floor_id;
         rooms = new HashMap<>();

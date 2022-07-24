@@ -1,4 +1,6 @@
-package com.gradle.code;
+package com.gradle.code.services;
+
+import com.gradle.code.Project;
 
 public interface FloorService {
 

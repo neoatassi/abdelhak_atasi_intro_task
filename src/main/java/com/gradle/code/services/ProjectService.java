@@ -1,4 +1,5 @@
-package com.gradle.code;
+package com.gradle.code.services;
+import com.gradle.code.Project;
 import com.gradle.code.exceptions.ProjectDoesNotExist;
 
 import java.util.Map;

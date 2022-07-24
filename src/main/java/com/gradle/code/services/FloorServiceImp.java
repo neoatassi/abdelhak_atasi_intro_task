@@ -1,5 +1,6 @@
-package com.gradle.code;
+package com.gradle.code.services;
 
+import com.gradle.code.Project;
 import com.gradle.code.exceptions.RoomDoesNotExist;
 
 
@@ -27,15 +28,15 @@ public class FloorServiceImp implements FloorService {
 
     @Override
     public void addRoomToFloor(Project project, int floorLevel){
-        project.floors.get(floorLevel).addRoom(roomIdCounter);
+        project.getFloors().get(floorLevel).addRoom(roomIdCounter);
         roomIdCounter++;
     }
 
     @Override
     public void removeRoomFromFloor(Project project, int floorLevel, int roomId){
-        if(!project.floors.get(floorLevel).rooms.containsKey(roomId)) throw new RoomDoesNotExist();
+        if(!project.getFloors().get(floorLevel).getRooms().containsKey(roomId)) throw new RoomDoesNotExist();
 
-        project.floors.get(floorLevel).getRooms().remove(roomId);
+        project.getFloors().get(floorLevel).getRooms().remove(roomId);
     }
 
 }

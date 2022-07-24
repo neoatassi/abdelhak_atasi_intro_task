@@ -7,20 +7,14 @@ public class Project {
     int projectId;
     HashMap<Integer, Floor> floors;
 
-    /*
-    Project (int project_id){
-        this.project_id = project_id;
-    }
-    */
 
-
-    Project(String name, int projectId){
+    public Project(String name, int projectId){
         this.projectName = name;
         this.projectId = projectId;
         floors = new HashMap<>();
     }
 
-    Project(Project project, int Id){
+    public Project(Project project, int Id){
         this(project.projectName, project.projectId);
         this.projectId = Id;
         floors = new HashMap<>();
