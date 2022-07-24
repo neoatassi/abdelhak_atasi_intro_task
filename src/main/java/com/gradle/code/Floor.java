@@ -2,37 +2,44 @@ package com.gradle.code;
 
 import java.util.*;
 
-class Floor {
+public class Floor {
     int floorID;
     int floorLevel;
     HashMap<Integer, Room> rooms;
 
-    Floor(){
-
-    }
+    Floor(){}
 
     public Floor(int floor_id){
         this.floorID = floor_id;
         rooms = new HashMap<>();
     }
 
-    int getFloorID(){
+    public int getFloorID(){
         return this.floorID;
     }
 
-    void setFloorID(int floorID){
+    public void setFloorID(int floorID){
         this.floorID = floorID;
     }
 
-    int getFloorLevel(){
+    public int getFloorLevel(){
         return this.floorLevel;
     }
 
-    void setFloorLevel(int floorLevel){
+    public void setFloorLevel(int floorLevel){
         this.floorLevel = floorLevel;
     }
 
-    void addRoom(int roomID){
-        this.rooms.putIfAbsent(roomID, new Room(roomID));
+    public void addRoom(int roomID){
+        Room newRoom = new Room(roomID);
+        this.rooms.put(roomID, newRoom);
+    }
+
+    public Room getRoom(int roomID){
+        return rooms.get(roomID);
+    }
+
+    public HashMap<Integer, Room> getRooms(){
+        return this.rooms;
     }
 }

@@ -58,4 +58,12 @@ public class Project {
         this.floors = floors;
     }
 
+    public int getLastLevel(){
+        return this.floors.size() - 1;
+    }
+
+    public Floor getFloor(int floorLevel){
+        return this.floors.get(floorLevel);
+    }
+
 }
